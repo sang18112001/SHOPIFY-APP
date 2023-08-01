@@ -1,0 +1,25 @@
+.clearFilter {
+  margin-top: 8px;
+  color: #87909b;
+}
+
+.activeClearFilter {
+  color: #2463bc;
+  cursor: pointer;
+}
+
+.activeClearFilter:hover {
+  text-decoration: underline;
+}
+
+.boldText {
+  font-weight: 900;
+}
+
+.italicText {
+  font-style: italic;
+}
+
+.underlineText {
+   text-decoration: underline;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text Editor</title>
+</head>
+<body>
+    <div contenteditable="true" id="editor" style="width: 100%; height: 300px; border: 1px solid #ccc;">
+        Start typing here...
+    </div>
+
+    <script>
+        // Listen for the "message" event from the parent window
+        window.addEventListener('message', (event) => {
+            const { command } = event.data;
+            const editor = document.getElementById('editor');
+            const selection = window.getSelection();
+            const range = selection.getRangeAt(0);
+
+            // Check if the selection is not collapsed (i.e., contains text)
+            if (!range.collapsed) {
+                const parentElement = range.commonAncestorContainer.parentElement;
+
+                // Toggle the bold and italic formatting based on the command received
+                if (command === 'bold') {
+                  console.log(parentElement);
+                    if (parentElement.tagName === 'STRONG') {
+                        // If already bold, remove the <strong> tag
+                        parentElement.outerHTML = parentElement.innerHTML;
+                    } else {
+                        // Wrap the selected text with the <strong> tag
+                        const strongElement = document.createElement('strong');
+                        range.surroundContents(strongElement);
+                    }
+                } else if (command === 'italic') {
+                    if (parentElement.tagName === 'EM') {
+                        // If already italic, remove the <em> tag
+                        parentElement.outerHTML = parentElement.innerHTML;
+                    } else {
+                        // Wrap the selected text with the <em> tag
+                        const emElement = document.createElement('em');
+                        range.surroundContents(emElement);
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
